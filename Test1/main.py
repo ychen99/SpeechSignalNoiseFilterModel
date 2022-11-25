@@ -5,8 +5,8 @@ import numpy as np
 import math
 import soundfile
 from arch import  arch_model
-#clnsp1 无噪音音频     noisy1 纯噪音    noisy1+clnsp1 合成的含噪音频
 
+#检测信噪比的函数
 def SNR(s,sn):
     s=s-np.mean(s)
     s=s/np.max(np.abs(s))
@@ -15,7 +15,7 @@ def SNR(s,sn):
     pn=np.sum((s-sn)*(s-sn))
     return 10*math.log((ps/pn),10)
 
-#文件读取
+#文件读取 clnsp1 无噪音音频     noisy1 纯噪音    noisy1+clnsp1 合成的含噪音频
 noisy, sr=librosa.load('./noisy1.wav',sr=8000)
 audio_cleanWithNoisy ,sr=librosa.load('./noisy1+clnsp1.wav',sr=8000)
 clean, sr=librosa.load('clnsp1.wav',sr=8000)
